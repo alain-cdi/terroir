@@ -1,0 +1,53 @@
+<%= form_for(@producteur) do |f| %>
+  <% if @producteur.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@producteur.errors.count, "error") %> prohibited this producteur from being saved:</h2>
+
+      <ul>
+      <% @producteur.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :prenom %><br />
+    <%= f.text_field :prenom %>
+  </div>
+  <div class="field">
+    <%= f.label :nom %><br />
+    <%= f.text_field :nom %>
+  </div>
+  <div class="field">
+    <%= f.label :libelle %><br />
+    <%= f.text_field :libelle %>
+  </div>
+  <div class="field">
+    <%= f.label :info %><br />
+    <%= f.text_area :info %>
+  </div>
+  <div class="field">
+    <%= f.label :adresse %><br />
+    <%= f.text_field :adresse %>
+  </div>
+  <div class="field">
+    <%= f.label :code_postal %><br />
+    <%= f.text_field :code_postal %>
+  </div>
+  <div class="field">
+    <%= f.label :ville %><br />
+    <%= f.text_field :ville %>
+  </div>
+  <div class="field">
+    <%= f.label :mail %><br />
+    <%= f.text_field :mail %>
+  </div>
+  <div class="field">
+    <%= f.label :site %><br />
+    <%= f.text_field :site %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
