@@ -1,4 +1,6 @@
 Terroir::Application.routes.draw do
+  get "store/index"
+
   resources :clients
 
   resources :producteurs
@@ -9,7 +11,18 @@ Terroir::Application.routes.draw do
   # first created -> highest priority.
 
   # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+  # match 'products/:id' => 'catalog#view'
+
+  match :controller=>"login", :action=>"list_producteurs"
+
+  match :controller=>"login", :action=>"add_producteur"
+
+  match :controller=>"login", :action=>"logout"
+
+  match "hello_message/wsdl"=>"hello_message#hello_message"
+
+  match "backend/find_all_produits"=>"backend#find_all_produits"
+
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
@@ -54,7 +67,7 @@ Terroir::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  #root :to => 'welcome#index'
+  root :to => 'application#index'
 
   # See how all your routes lay out with "rake routes"
 

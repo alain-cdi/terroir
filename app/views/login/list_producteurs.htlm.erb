@@ -1,0 +1,16 @@
+
+<h1>Administrations</h1>
+<ul>
+  <% for producteur in @all_producteurs %>
+    <li><%= link_to "[X]", { # link_to options
+                             :controller => 'login',
+                             :action => 'delete_user',
+                             :id => producteur},
+                           { # html options
+                             :method  => :post,
+                             :confirm => "Really delete #{producteur.nom}?"
+                           } %>
+        <%= h(producteur.nom) %>
+    </li>
+  <% end %>
+</ul>

@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Terroir</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Terroir</title>
+    <%= stylesheet_link_tag   "application", "scaffolds", "terroir", :media => "all" %>
+    <%= javascript_include_tag  "application", :media => "all"  %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body id="produits">
+    <div id="banner">
 
-<%= yield %>
+      <%= image_tag("Logo_Vosges_Terroir_100.jpg", {:height => 50})%>
 
-</body>
+      <%= @page_title || "TERROIR VOSGES" %>
+    </div>
+    <div id="columns">
+      <div id="side">
+        <p>
+          <%= link_to "List Produits",   :controller => 'produits', :action => 'index' %>
+        </p>
+        <p>
+          <%= link_to "Catégories",   :controller => 'produits', :action => 'index' %>
+          <br/>
+          <%= link_to "> Fromages",   :controller => 'produits', :action => 'index' %>
+          <br/>
+          <%= link_to "> Charcuteries",   :controller => 'produits', :action => 'index' %>
+          <br/>
+        </p>
+        <p>
+          <%= link_to "List Producteurs", :controller => 'login', :action => 'list_producteurs' %>
+          <br/>
+          <%= link_to "Add Producteur",   :controller => 'login', :action => 'add_producteur' %>
+        </p>
+        <p>
+          <%= link_to "Logout",     :controller => 'login', :action => 'logout' %>
+        </p>
+      </div>
+      <div id="main">
+        <% if flash[:notice] -%>
+          <div id="notice"><%= flash[:notice] %></div>
+        <% end -%>
+
+        <%= yield :layout %>
+      </div>
+    </div>
+  </body>
 </html>

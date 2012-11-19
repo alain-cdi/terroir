@@ -1,0 +1,14 @@
+
+  <h1>Le catalogue de tous les produits</h1>
+  <% @produits.each do |produit| %>
+    <div class="entry">
+      <img src="<%= produit.image_url %>"/>
+      <h3>
+        <%= h(produit.libelle) %>
+      </h3>
+      <%= produit.description %>
+      <span classe="price">
+        <%=produit.prix%>
+      </span>
+    </div>
+  <% end %>
