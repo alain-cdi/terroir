@@ -32,7 +32,7 @@ class ProducteursController < ApplicationController
     end
   end
 
-  # GET /producteurs/1/edit
+   # GET /producteurs/1/edit
   def edit
     @producteur = Producteur.find(params[:id])
   end
@@ -80,4 +80,26 @@ class ProducteursController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+   # just display the form and wait for producteur to
+  # enter a name and password
+  #START:login
+  def login
+    session[:producteur_id] = nil
+    if request.post?
+      producteur = Producteur.authenticate(params[:nom], params[:password])
+      if producteur
+        session[:producteur_id] = producteur.id
+        redirect_to(:action => "index")
+      else
+        flash[:notice] = "Couple utilisateur / mot de passe invalide"
+      end
+
+    end
+    flash[:notice] = "NON POST222 !!"
+  end
+  #END:login
+
+
 end

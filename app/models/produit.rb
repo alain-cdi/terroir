@@ -9,9 +9,7 @@ class Produit < ActiveRecord::Base
   validates_format_of(:image_url, :with => %r{\.(gif|jpg|png)$}i, :message => "doit être l'URL d'une image GIF, JPG ou PNG")
   validates_numericality_of(:prix)
 
-  def self.find_produits_client
-    find(:all, :order=>"libelle")
-  end
+  belongs_to :categorie
 
   protected
   def validate

@@ -1,5 +1,6 @@
 Terroir::Application.routes.draw do
-  get "store/index"
+ 
+  resources :categories
 
   resources :clients
 
@@ -13,15 +14,38 @@ Terroir::Application.routes.draw do
   # Sample of regular route:
   # match 'products/:id' => 'catalog#view'
 
-  match :controller=>"login", :action=>"list_producteurs"
+  # match "application/index"=>"application#index"
 
-  match :controller=>"login", :action=>"add_producteur"
+  match "store/index"=>"store#index"
 
-  match :controller=>"login", :action=>"logout"
+  match "store/fromage"=>"store#fromage"
 
-  match "hello_message/wsdl"=>"hello_message#hello_message"
+  match "store/charcuterie"=>"store#charcuterie"
 
-  match "backend/find_all_produits"=>"backend#find_all_produits"
+  match "store/login"=>"store#login"
+
+  match "producteurs/add_producteur"=>"producteurs#add_producteur"
+  
+  match "store/add_producteur"=>"store#add_producteur"
+
+
+
+  match "login"=>"login#index"
+
+  match "login/login"=>"login#login"
+
+  match "login/logout"=>"login#logout"
+
+  match "login/add_producteur"=>"login#add_producteur"
+
+  match "producteurs/login"=>"producteurs#login"
+
+  match "producteurs/add_producteur"=>"producteurs#add_producteur"
+
+
+
+    
+  #match "backend/invoke"=>"backend#invoke"
 
   # Keep in mind you can assign values other than :controller and :action
 
@@ -67,11 +91,25 @@ Terroir::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'application#index'
+  root :to => 'store#index'
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
+  #match ':backend(/:wsdl(/:id(.:format)))'
   # match ':controller(/:action(/:id))(.:format)'
+  
+  # Allow downloading Web Service WSDL as a file with an extension
+  # instead of a file named 'wsdl'
+  # map.connect ':controller/service.wsdl', :action => 'wsdl'
+  # Install the default route as the lowest priority.
+  # map.connect ':controller/:action/:id'
+
+  match ':controller/service.wsdl', :action => 'wsdl'
+
+  # Install the default route as the lowest priority.
+  match ':controller/:action/:id'
+
+
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Terroir</title>
+    <title>Terroir, Produits de la ferme</title>
     <%= stylesheet_link_tag "terroir", :media => "all" %>
     <%= javascript_include_tag :defaults%>
     <%= csrf_meta_tags %>
@@ -12,13 +12,35 @@
       <%= image_tag("Logo_Vosges_Terroir_100.jpg", {:height => 50})%>
 
       <%= @page_title || "TERROIR VOSGES" %>
+     
     </div>
     <div id="columns">
       <div id="side">
-        <a href="http://www....">Home</a><br />
+        <a href="http://www....">Accueil</a><br />
         <a href="http://www..../faq">Questions</a><br />
         <a href="http://www..../news">News</a><br />
         <a href="http://www..../contact">Contact</a><br />
+        <p>
+          <%= link_to "Vous êtes un nouveau producteur", :controller => 'store', :action => 'add_producteur' %>
+        
+        <br />
+        <br />
+        
+          <%= link_to "Producteur déjà inscrit", :controller => 'store', :action => 'login' %>
+        </p>
+        <br />
+
+        <p>
+          NOTRE CATALOGUE
+        </p>
+        <p>
+          <%= link_to "Tous les produits",   :controller => 'store', :action => 'index' %>
+          <br />
+          <%= link_to "Charcuteries",   :controller => 'store', :action => 'charcuterie' %>
+          <br />
+          <%= link_to "Fromages",   :controller => 'store', :action => 'fromage' %>
+          <br />
+        </p>
       </div>
       <div id="main">
         <% if flash[:notice] -%>

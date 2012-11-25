@@ -1,4 +1,5 @@
 class ProduitsController < ApplicationController
+  before_filter :authorize
   # GET /produits
   # GET /produits.json
   def index
@@ -9,6 +10,8 @@ class ProduitsController < ApplicationController
       format.json { render json: @produits }
     end
   end
+
+
 
   # GET /produits/1
   # GET /produits/1.json

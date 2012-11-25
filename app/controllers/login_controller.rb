@@ -1,59 +1,53 @@
 class LoginController < ApplicationController
-# before_filter :authorize, :except=> :login
-  layout "application"
+
+  layout "store"  #
+
+  #START:authorize
+  #  before_filter :authorize, :except => :login
+  # . .
+  #END:authorize
+def index
   
-  # just display the form and wait for user to
+end
+
+
+  # just display the form and wait for producteur to
   # enter a name and password
   #START:login
   def login
-     session[:producteur_id] = nil
+    session[:producteur_id] = nil
     if request.post?
       producteur = Producteur.authenticate(params[:nom], params[:password])
-     
       if producteur
         session[:producteur_id] = producteur.id
-        session[:producteur_nom] = producteur.nom
-        #test
-        #@nom_producteur=Producteur.nom.find(session[:producteur_id])
-        
-        #fin
         redirect_to(:action => "index")
       else
-        flash[:notice] = "Couple producteur / mot de passe invalide"
+        flash[:notice] = "Couple utilisateur / mot de passe invalide"
       end
+      
     end
+    flash[:notice] = "NON POST Test !!"
   end
   #END:login
 
-  def add_producteur
-    @producteur=Producteur.new(params[:producteur])
-    if request.post? and @producteur.save
-      flash.now[:notice]="Producteur #{@producteur.nom} cree"
-      @producteur=Producteur.new
-    end
-  end
-
-
-  def logout
-    session[:producteur_id]=nil
-    flash[:notice]="Deconnecte"
-    redirect_to(:action=>"login")
-    
-  end
-
-  def index
-    @total_produits = Produit.count
-  end
+ 
 
   def delete_producteur
-    if request.post?
-      producteur=Producteur.find(params[:id])
-      producteur.destroy
+    id = params[:id]
+    if id && producteur = Producteur.find(id)
+      begin
+        producteur.destroy
+        flash[:notice] = "Supression de l'utilisateur #{producteur.nom} effectuée."
+      rescue Exception => e
+        flash[:notice] = e.message
+      end
     end
-    redirect_to(:action=>:list_producteurs)
+    redirect_to(:action => login)
   end
 
-  def list_producteurs
-    @all_producteurs=Producteur.find(:all)
+  def logout
+    session[:producteur_id] = nil
+    flash[:notice] = "Déconnection"
+    redirect_to(:action => "login")
   end
 end

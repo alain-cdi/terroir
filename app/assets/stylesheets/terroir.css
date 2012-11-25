@@ -80,6 +80,13 @@
     font-size: small;
 }
 
+
+#side p {
+    color: #bfb;
+    font-size: small;
+}
+
+
 h1 {
     font:  150% sans-serif;
     color: #226;
@@ -165,7 +172,7 @@ h1 {
 }
 /* END:cart */
 
-/* Styles for order form */
+
 
 .terroir-form fieldset {
     background: #efe;
@@ -179,7 +186,7 @@ h1 {
 }
 
 .terroir-form label {
-    width: 5em;
+    width: 7em;
     float: left;
     text-align: right;
     margin-right: 0.5em;
